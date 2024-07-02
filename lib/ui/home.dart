@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_application/models/city.dart';
@@ -47,41 +46,46 @@ class _HomeState extends State<Home> {
   String searchWeatherUrl =
       "https://api.weatherapi.com/v1/current.json?key=${Constant.apiKey}&q=";
 
-  void fetch7dayweathedata(String location) async {
-    try {
-      String weatherday =
-          "https://api.weatherapi.com/v1/forecast.json?key=${Constant.apiKey}&q=$location&days=7";
-      var daysresult = await http.get(Uri.parse(weatherday));
-      var result = json.decode(daysresult.body);
-      // log(result.toString());
+ void fetch7dayweathedata(String location) async {
+  try {
+    String weatherday =
+        "https://api.weatherapi.com/v1/forecast.json?key=${Constant.apiKey}&q=$location&days=7";
+    var daysresult = await http.get(Uri.parse(weatherday));
+    var result = json.decode(daysresult.body);
+    // log(result.toString());
 
-      if (result != null) {
-        setState(() {
-          consolidatedWeatherList = List<Map<String, dynamic>>.from(
-              result['forecast']['forecastday'].map((day) {
-            String date = day['date'];
-            try {
-              DateTime parsedDate = DateTime.parse(date);
-              date = DateFormat('yyyy-MM-dd').format(parsedDate);
-            } catch (e) {
-              log('Error parsing date: $date, error: $e');
-            }
+    if (result != null && result['forecast'] != null && result['forecast']['forecastday'] != null) {
+      setState(() {
+        consolidatedWeatherList = List<Map<String, dynamic>>.from(
+            result['forecast']['forecastday'].map((day) {
+          String date = day['date'];
+          try {
+            DateTime parsedDate = DateTime.parse(date);
+            date = DateFormat('yyyy-MM-dd').format(parsedDate);
+          } catch (e) {
+            log('Error parsing date: $date, error: $e');
+          }
 
-            return {
-              'date': date,
-              'condition': day['day']['condition']['text'],
-              'icon': day['day']['condition']['icon'],
-              'max_temp': day['day']['maxtemp_c'],
-              'min_temp': day['day']['mintemp_c'],
-              'temp_c': day['day']['temp_c'],
-            };
-          }));
-        });
-      }
-    } catch (e) {
-      log('Error fetching weather data: $e');
+          var dayData = day['day'];
+          return {
+            'date': date,
+            'condition': dayData['condition']['text'],
+            'icon': dayData['condition']['icon'],
+            'max_temp': dayData['maxtemp_c'],
+            'min_temp': dayData['mintemp_c'],
+            'humidity': dayData['avghumidity'], // Assuming 'avghumidity' is the correct field name for humidity
+            'temperature': dayData['avgtemp_c'], // Assuming 'avgtemp_c' is the correct field name for temperature
+            'windSpeed': dayData['maxwind_kph'], // Assuming 'maxwind_kph' is the correct field name for wind speed
+          };
+        }));
+      });
     }
+  } catch (e) {
+    log('Error fetching weather data: $e');
   }
+}
+
+
 
   void fetchiWeatherData(String location) async {
     try {
@@ -102,7 +106,7 @@ class _HomeState extends State<Home> {
 
           location = result['location']['name'];
           var mydate = DateTime.parse(result['location']['localtime']);
-          currentDate = DateFormat('EEEE').format(mydate);
+          currentDate = DateFormat('EEEE , dd MMMM').format(mydate);
           imageUrl = icon;
           maxtemp = temperature.toInt();
           this.location = result['location']['name'];
@@ -148,6 +152,13 @@ class _HomeState extends State<Home> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                   Image.asset(
+                    'assets/pin.png',
+                    width: 20,
+                  ),
+                   const SizedBox(
+                    width: 4,
+                  ),
                   DropdownButton<City>(
                     value: selectedCity,
                     items: widget.selectedCities.map((City city) {
@@ -164,13 +175,8 @@ class _HomeState extends State<Home> {
                       });
                     },
                   ),
-                  Image.asset(
-                    'assets/pin.png',
-                    width: 20,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
+                 
+                 
                 ],
               ),
             ],
@@ -219,8 +225,8 @@ class _HomeState extends State<Home> {
                   clipBehavior: Clip.none,
                   children: [
                     Positioned(
-                      top: -40,
-                      left: 20,
+                      top: -60,
+                      left: 05,
                       child: imageUrl == ''
                           ? const Text('')
                           : Image.network(
@@ -260,7 +266,7 @@ class _HomeState extends State<Home> {
                           Text(
                             'o',
                             style: TextStyle(
-                              fontSize: 80,
+                              fontSize: 40,
                               fontWeight: FontWeight.bold,
                               foreground: Paint()..shader = linearGradient,
                             ),
