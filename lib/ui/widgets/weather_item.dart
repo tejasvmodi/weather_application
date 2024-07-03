@@ -1,17 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
 
 class WeatherItem extends StatelessWidget {
-  const WeatherItem({
-    super.key,
+  const WeatherItem({super.key, 
     required this.value,
-    required this.text,
     required this.unit,
     required this.imageUrl,
+    this.text,
   });
 
   final double value;
-  final String text;
+  final String? text;
   final String unit;
   final String imageUrl;
 
@@ -20,7 +20,7 @@ class WeatherItem extends StatelessWidget {
     return Column(
       children: [
         Text(
-          text,
+          text != null && text!.isNotEmpty ? text! : '',
           style: const TextStyle(color: Colors.black54),
         ),
         const SizedBox(

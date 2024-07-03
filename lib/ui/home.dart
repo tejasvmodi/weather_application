@@ -345,10 +345,8 @@ class _HomeState extends State<Home> {
                     var newDate =
                         DateFormat('EEEE').format(parsedDate).substring(0, 3);
                     var weatherIcon = day['icon'];
-                    var weatherStateName = day['condition'];
                     var maxTemp = day['max_temp'];
                     var minTemp = day['min_temp'];
-                    var temp_c = day['temp_c'];
                     double avg = double.parse(maxTemp.toString()) +
                         double.parse(minTemp.toString());
 

@@ -77,8 +77,6 @@ class _DetailPageState extends State<DetailPage> {
                 itemCount: widget.consolidatedweatherList.length,
                 itemBuilder: (context, index) {
                   log(widget.consolidatedweatherList.toString());
-                  var futurweatherName = widget.consolidatedweatherList[index]
-                      ['weather_state_name'];
                   var futureicon =
                       widget.consolidatedweatherList[index]['icon'];
                   var url = widget.consolidatedweatherList[index]['icon']
@@ -288,9 +286,6 @@ class _DetailPageState extends State<DetailPage> {
                           scrollDirection: Axis.vertical,
                           itemCount: widget.consolidatedweatherList.length,
                           itemBuilder: (context, index) {
-                            var futurWeatherName =
-                                widget.consolidatedweatherList[index]
-                                    ['weather_state_name'];
                             var futureicon =
                                 widget.consolidatedweatherList[index]['icon'];
                             var futureurl = widget
