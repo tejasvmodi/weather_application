@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_application/ui/CIty%20weather%20data/city_weather_data.dart';
 import 'package:weather_application/ui/Country%20weather%20data/get_started.dart';
 
 void main() {

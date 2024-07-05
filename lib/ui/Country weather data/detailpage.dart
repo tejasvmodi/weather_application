@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_application/models/constant.dart';
-import 'package:weather_application/ui/Country%20weather%20data/welcome.dart';
-import 'package:weather_application/ui/widgets/setting.dart';
 import 'package:weather_application/ui/widgets/weather_item.dart';
 
 class DetailPage extends StatefulWidget {
