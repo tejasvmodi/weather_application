@@ -3,10 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:weather_application/models/constant.dart';
-import 'package:weather_application/ui/detail_page.dart';
+import 'package:weather_application/ui/CIty%20weather%20data/detail_page_city.dart';
+import 'package:weather_application/ui/widgets/setting.dart';
 import 'package:weather_application/ui/widgets/weather_item.dart';
 
 class Cityweatherdata extends StatefulWidget {
@@ -134,10 +136,20 @@ class _CityweatherdataState extends State<Cityweatherdata> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        'assets/menu.png',
-                        width: 40,
-                        height: 40,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const SettingWeathericon(),
+                              ));
+                        },
+                        child: Image.asset(
+                          'assets/menu.png',
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -464,14 +476,14 @@ class _CityweatherdataState extends State<Cityweatherdata> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        
-                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailPagecity(
-                              daliyforcastwether: dailyweatherForcast,
-                            ),
-                      ));},
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPagecity(
+                                daliyforcastwether: dailyweatherForcast,
+                              ),
+                            ));
+                      },
                       child: ListView.builder(
                         itemCount: hourlyweatherforcast.length,
                         scrollDirection: Axis.horizontal,
@@ -531,7 +543,7 @@ class _CityweatherdataState extends State<Cityweatherdata> {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                Image.network(weatherIcon, width: 20),
+                                Image.network(weatherIcon, width: 35),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

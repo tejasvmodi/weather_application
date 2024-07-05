@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_application/ui/city_weather_data.dart';
+import 'package:weather_application/ui/CIty%20weather%20data/city_weather_data.dart';
+import 'package:weather_application/ui/Country%20weather%20data/get_started.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Cityweatherdata(),
+      home: const Getstarted(),
     );
   }
 }

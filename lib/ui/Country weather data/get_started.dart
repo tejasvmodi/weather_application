@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_application/models/constant.dart';
-import 'package:weather_application/ui/welcome.dart';
+import 'package:weather_application/ui/Country%20weather%20data/welcome.dart';
 
 class Getstarted extends StatelessWidget {
   const Getstarted({super.key});

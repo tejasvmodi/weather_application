@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_application/models/constant.dart';
-import 'package:weather_application/ui/welcome.dart';
+import 'package:weather_application/ui/Country%20weather%20data/welcome.dart';
+import 'package:weather_application/ui/widgets/setting.dart';
 import 'package:weather_application/ui/widgets/weather_item.dart';
 
 class DetailPage extends StatefulWidget {
@@ -17,7 +16,7 @@ class DetailPage extends StatefulWidget {
       required this.selectedId,
       required this.location,
       required this.imageUrl});
-
+ 
   @override
   State<DetailPage> createState() => _DetailPageState();
 }
@@ -48,18 +47,7 @@ class _DetailPageState extends State<DetailPage> {
         backgroundColor: myconstant.secondaryColor,
         title: Text(widget.location),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Welcome(),
-                      ));
-                },
-                icon: const Icon(Icons.settings)),
-          ),
+         
         ],
       ),
       body: Stack(
@@ -76,7 +64,6 @@ class _DetailPageState extends State<DetailPage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: widget.consolidatedweatherList.length,
                 itemBuilder: (context, index) {
-                  log(widget.consolidatedweatherList.toString());
                   var futureicon =
                       widget.consolidatedweatherList[index]['icon'];
                   var url = widget.consolidatedweatherList[index]['icon']

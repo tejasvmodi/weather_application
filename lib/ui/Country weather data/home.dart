@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:weather_application/models/city.dart';
 import 'package:weather_application/models/constant.dart';
 import 'package:http/http.dart' as http;
-import 'package:weather_application/ui/detailpage.dart';
+import 'package:weather_application/ui/Country%20weather%20data/detailpage.dart';
+import 'package:weather_application/ui/widgets/setting.dart';
 import 'package:weather_application/ui/widgets/weather_item.dart';
 
 class Home extends StatefulWidget {
@@ -139,25 +140,16 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                child: Image.asset(
-                  'assets/profile.png',
-                  width: 40,
-                  height: 40,
-                ),
-              ),
-              Row(
+                Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                    Image.asset(
                     'assets/pin.png',
                     width: 20,
+                    color: Colors.black,
                   ),
                    const SizedBox(
-                    width: 4,
+                    width: 6,
                   ),
                   DropdownButton<City>(
                     value: selectedCity,
@@ -179,6 +171,19 @@ class _HomeState extends State<Home> {
                  
                 ],
               ),
+               Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingWeathericon(),
+                      ));
+                },
+                icon: const Icon(Icons.settings)),
+          ),
+            
             ],
           ),
         ),
