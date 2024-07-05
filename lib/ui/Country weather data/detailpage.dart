@@ -44,9 +44,6 @@ class _DetailPageState extends State<DetailPage> {
         centerTitle: true,
         backgroundColor: myconstant.secondaryColor,
         title: Text(widget.location),
-        actions: [
-         
-        ],
       ),
       body: Stack(
         alignment: Alignment.center,
